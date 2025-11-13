@@ -1,7 +1,6 @@
-import {makeIndex} from "./lib/utils.js";
 const BASE_URL = 'https://webinars.webdev.education-services.ru/sp7-api';
 
-export function initData(sourceData) {
+export function initData() {
     // переменные для кеширования данных
     let sellers;
     let customers;
@@ -33,8 +32,6 @@ export function initData(sourceData) {
     const getRecords = async (query, isUpdated = false) => {
             const qs = new URLSearchParams(query); // преобразуем объект параметров в SearchParams объект, представляющий query часть url
             const nextQuery = qs.toString(); // и приводим к строковому виду
-
-            await getIndexes();
 
             if (lastQuery === nextQuery && !isUpdated) { // isUpdated параметр нужен, чтобы иметь возможность делать запрос без кеша
                 return lastResult; // если параметры запроса не поменялись, то отдаём сохранённые ранее данные
